@@ -440,12 +440,17 @@ with st.sidebar:
         "データ取得開始日",
         value=datetime.date(2020, 1, 1),
         min_value=datetime.date(2015, 1, 1),
-        max_value=datetime.date.today(),
-        help="yfinanceでのデータ取得開始日を指定します。古いほど学習データが増えます。",
+        max_value=datetime.date.today() - datetime.timedelta(days=365),
+        help="学習データの取得開始日です。最低1年以上前の日付を指定してください（推奨: 2020-01-01）",
     )
 
+    # データ期間チェック
+    days_range = (datetime.date.today() - yf_start).days
+    if days_range < 365:
+        st.warning("⚠️ 開始日が直近すぎます。\n2020-01-01 など1年以上前を指定してください。")
+
     st.markdown("---")
-    run_button = st.button("🚀  予測を実行", use_container_width=True)
+    run_button = st.button("🚀  予測を実行", use_container_width=True, disabled=(days_range < 365))
     st.markdown("---")
 
     st.markdown("""
