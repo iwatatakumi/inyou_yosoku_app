@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# 学習済みモデル（サイズが大きいためGit管理対象外）
+models/
+
+# 生成CSVファイル
+csv/train_target0501.csv
+csv/test_predict.csv
+
+# 元データ（ローカル専用）
+in_data/
+
+# 環境
+.env
+.venv/
+venv/
+
+# macOS
+.DS_Store
